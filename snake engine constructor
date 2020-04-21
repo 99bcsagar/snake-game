@@ -1,0 +1,44 @@
+public SnakeEngine(Context context, Point size) {
+	super(context);
+
+	context = context;
+
+	screenX = size.x;
+	screenY = size.y;
+
+	// Work out how many pixels each block is
+	blockSize = screenX / NUM_BLOCKS_WIDE;
+	// How many blocks of the same size will fit into the height
+	numBlocksHigh = screenY / blockSize;
+
+	// Set the sound up
+    soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+    try {
+        // Create objects of the 2 required classes
+        // Use m_Context because this is a reference to the Activity
+        AssetManager assetManager = context.getAssets();
+        AssetFileDescriptor descriptor;
+ 
+        // Prepare the two sounds in memory
+        descriptor = assetManager.openFd("get_mouse_sound.ogg");
+        eat_bob = soundPool.load(descriptor, 0);
+ 
+        descriptor = assetManager.openFd("death_sound.ogg");
+        snake_crash = soundPool.load(descriptor, 0);
+ 
+    } catch (IOException e) {
+        // Error
+    }
+
+
+	// Initialize the drawing objects
+	surfaceHolder = getHolder();
+	paint = new Paint();
+
+	// If you score 200 you are rewarded with a crash achievement!
+	snakeXs = new int[200];
+	snakeYs = new int[200];
+
+	// Start the game
+	newGame();
+}
