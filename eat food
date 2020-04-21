@@ -1,0 +1,5 @@
+public void spawnBob() {
+    Random random = new Random();
+    bobX = random.nextInt(NUM_BLOCKS_WIDE - 1) + 1;
+    bobY = random.nextInt(numBlocksHigh - 1) + 1;
+}
