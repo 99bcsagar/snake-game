@@ -1,0 +1,19 @@
+private boolean detectDeath(){
+    // Has the snake died?
+    boolean dead = false;
+ 
+    // Hit the screen edge
+    if (snakeXs[0] == -1) dead = true;
+    if (snakeXs[0] >= NUM_BLOCKS_WIDE) dead = true;
+    if (snakeYs[0] == -1) dead = true;
+    if (snakeYs[0] == numBlocksHigh) dead = true;
+ 
+    // Eaten itself?
+    for (int i = snakeLength - 1; i > 0; i--) {
+        if ((i > 4) && (snakeXs[0] == snakeXs[i]) && (snakeYs[0] == snakeYs[i])) {
+            dead = true;
+        }
+    }
+ 
+    return dead;
+}
